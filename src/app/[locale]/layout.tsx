@@ -5,7 +5,7 @@ import { getMessages } from "src/data/i18n/intl";
 import Navbar from "./(components)/Navbar";
 import { Footer } from "./(components)/Footer";
 import { getMainMenu } from "src/data/settings/main-menu";
-import React from "react";
+import React, { Suspense } from "react";
 import { i18nConfig } from "src/data/i18n/config";
 import { notFound } from "next/navigation";
 
@@ -36,7 +36,9 @@ export default async function LocaleLayout({
               ALGOLIA_SEARCH_API_KEY: process.env.ALGOLIA_SEARCH_API_KEY!,
             }}
           />
-          {children}
+          <Suspense fallback={<div />}>
+            {children}
+          </Suspense>
         </PageContainer>
         <Footer mainMenu={mainMenu} />
       </ClientLocaleProvider>
