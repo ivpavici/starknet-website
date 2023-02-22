@@ -28,17 +28,17 @@ export default async function LocaleLayout({
     <ThemeProvider>
       <ClientLocaleProvider value={{ locale, messages }}>
         <PageContainer>
-          <Navbar
-            mainMenu={mainMenu}
-            env={{
-              ALGOLIA_INDEX: process.env.ALGOLIA_INDEX!,
-              ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID!,
-              ALGOLIA_SEARCH_API_KEY: process.env.ALGOLIA_SEARCH_API_KEY!,
-            }}
-          />
           <Suspense fallback={<div />}>
-            {children}
+            <Navbar
+              mainMenu={mainMenu}
+              env={{
+                ALGOLIA_INDEX: process.env.ALGOLIA_INDEX!,
+                ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID!,
+                ALGOLIA_SEARCH_API_KEY: process.env.ALGOLIA_SEARCH_API_KEY!,
+              }}
+            />
           </Suspense>
+          {children}
         </PageContainer>
         <Footer mainMenu={mainMenu} />
       </ClientLocaleProvider>
