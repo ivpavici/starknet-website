@@ -25,12 +25,11 @@
       }
     ]
   },
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "references": [{ "path": "./tsconfig.node.json" },{ "path": "./tsconfig.static-cms.json" }],
   "include": [
     "env.d.ts",
     "next-env.d.ts",
     "src",
-    "workspaces/netlify-cms/src",
     ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules", "dist"]

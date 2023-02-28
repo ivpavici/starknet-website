@@ -1,9 +1,8 @@
 import {
-  CmsConfig,
-  CmsField,
-  CmsFieldList,
-  CmsFieldMeta,
-} from "netlify-cms-core";
+  Config,
+  Field,
+  ListField
+} from "@staticcms/core";
 
 const locale = "en";
 
@@ -12,26 +11,30 @@ const branch =
 
 console.log("branch", branch);
 
-const linkFields: CmsField[] = [
+const linkFields: Field[] = [
   {
     label: "Custom Title",
     required: false,
     name: "custom_title",
+    widget: 'string'
   },
   {
     label: "Custom Icon",
     required: false,
     name: "custom_icon",
+    widget: 'string'
   },
   {
     label: "Custom Internal Link",
     required: false,
     name: "custom_internal_link",
+    widget: 'string'
   },
   {
     label: "Custom External Link",
     required: false,
     name: "custom_external_link",
+    widget: 'string'
   },
   {
     label: "Page",
@@ -55,7 +58,7 @@ const linkFields: CmsField[] = [
   },
 ];
 
-const blocks: CmsFieldList["types"] = [
+const blocks: ListField["types"] = [
   {
     name: "markdown",
     label: "Rich Text / Markdown",
@@ -74,9 +77,11 @@ const blocks: CmsFieldList["types"] = [
     fields: [
       {
         name: "title",
+        widget: 'string'
       },
       {
         name: "description",
+        widget: 'string'
       },
     ],
   },
@@ -114,6 +119,7 @@ const blocks: CmsFieldList["types"] = [
       {
         name: "no_of_items",
         required: false,
+        widget: 'string'
       },
     ],
   },
@@ -129,6 +135,7 @@ const blocks: CmsFieldList["types"] = [
       {
         name: "no_of_items",
         required: false,
+        widget: 'string'
       },
     ],
   },
@@ -144,6 +151,7 @@ const blocks: CmsFieldList["types"] = [
       {
         name: "no_of_items",
         required: false,
+        widget: 'string'
       },
     ],
   },
@@ -159,6 +167,7 @@ const blocks: CmsFieldList["types"] = [
       {
         name: "no_of_items",
         required: false,
+        widget: 'string'
       },
     ],
   },
@@ -174,6 +183,7 @@ const blocks: CmsFieldList["types"] = [
       {
         name: "no_of_items",
         required: false,
+        widget: 'string'
       },
     ],
   },
@@ -184,9 +194,11 @@ const blocks: CmsFieldList["types"] = [
     fields: [
       {
         name: "title",
+        widget: 'string'
       },
       {
         name: "description",
+        widget: 'string'
       },
       {
         name: "link",
@@ -202,6 +214,7 @@ const blocks: CmsFieldList["types"] = [
     fields: [
       {
         name: "title",
+        widget: 'string'
       },
       {
         name: "link",
@@ -224,6 +237,7 @@ const blocks: CmsFieldList["types"] = [
     fields: [
       {
         name: "title",
+        widget: 'string'
       },
       {
         name: "link",
@@ -250,16 +264,17 @@ const blocks: CmsFieldList["types"] = [
     fields: [
       {
         name: "title",
+        widget: 'string'
       },
       {
         name: "description",
+        widget: 'string'
       },
       {
         name: "link",
         widget: "object",
         fields: linkFields,
       },
-
       {
         name: "icon",
         widget: "image",
@@ -281,7 +296,6 @@ const blocks: CmsFieldList["types"] = [
       },
     ],
   },
-
   {
     name: "large_card",
     label: "Large card",
@@ -289,6 +303,7 @@ const blocks: CmsFieldList["types"] = [
     fields: [
       {
         name: "title",
+        widget: 'string'
       },
       {
         name: "link",
@@ -297,6 +312,7 @@ const blocks: CmsFieldList["types"] = [
       },
       {
         name: "description",
+        widget: 'string'
       },
       {
         name: "image",
@@ -317,12 +333,12 @@ const blocks: CmsFieldList["types"] = [
     fields: [
       {
         name: "title",
+        widget: 'string'
       },
-
       {
         name: "description",
+        widget: 'string'
       },
-
       {
         name: "variant",
         widget: "select",
@@ -349,6 +365,7 @@ const blocks: CmsFieldList["types"] = [
         name: "heading",
         label: "Heading",
         required: false,
+        widget: 'string'
       },
       {
         name: "blocks",
@@ -357,12 +374,15 @@ const blocks: CmsFieldList["types"] = [
         fields: [
           {
             name: "label",
+            widget: 'string'
           },
           {
             name: "sub_label",
+            widget: 'string'
           },
           {
             name: "href",
+            widget: 'string'
           },
           {
             name: "is_external",
@@ -383,6 +403,7 @@ const blocks: CmsFieldList["types"] = [
         name: "heading",
         label: "Heading",
         required: false,
+        widget: 'string'
       },
       {
         name: "blocks",
@@ -392,6 +413,7 @@ const blocks: CmsFieldList["types"] = [
           {
             name: "label",
             label: "Label",
+            widget: 'string'
           },
           {
             name: "body",
@@ -406,7 +428,6 @@ const blocks: CmsFieldList["types"] = [
     name: "ordered_block",
     label: "Ordered Block",
     widget: "object",
-
     fields: [
       {
         name: "blocks",
@@ -415,6 +436,7 @@ const blocks: CmsFieldList["types"] = [
         fields: [
           {
             name: "title",
+            widget: 'string'
           },
           {
             name: "body",
@@ -427,17 +449,24 @@ const blocks: CmsFieldList["types"] = [
   },
 ];
 
-const topLevelBlocks: CmsFieldList["types"] = [
+const topLevelBlocks: ListField["types"] = [
   {
     name: "group",
     label: "Block group",
     widget: "object",
     fields: [
       {
+        // quickfix for a bug with lists that have only one field
+        name: 'not-a-field',
+        widget: 'hidden',
+        required: false
+      },
+      {
         name: "blocks",
         label: "Blocks",
         widget: "list",
         types: blocks,
+        default: [],
       },
     ],
   },
@@ -456,6 +485,7 @@ const topLevelBlocks: CmsFieldList["types"] = [
         label: "Blocks",
         widget: "list",
         types: blocks,
+        default: [],
       },
     ],
   },
@@ -487,6 +517,7 @@ const topLevelBlocks: CmsFieldList["types"] = [
       {
         name: "heading",
         required: false,
+        widget: 'string'
       },
       {
         name: "heading_variant",
@@ -500,13 +531,14 @@ const topLevelBlocks: CmsFieldList["types"] = [
         label: "Blocks",
         widget: "list",
         types: blocks,
+        default: [],
       },
     ],
   },
   ...blocks,
 ];
 
-export const config: CmsConfig = {
+export const config: Config = {
   backend: {
     name: "github",
     repo: "starknet-io/starknet-website",
@@ -534,6 +566,7 @@ export const config: CmsConfig = {
         {
           name: "title",
           label: "Title",
+          widget: 'string'
         },
         {
           name: "template",
@@ -610,6 +643,7 @@ export const config: CmsConfig = {
         {
           name: "title",
           label: "Post Title",
+          widget: 'string'
         },
         {
           name: "published_date",
@@ -619,13 +653,14 @@ export const config: CmsConfig = {
         {
           name: "time_to_consume",
           label: "Time to read / watch / listen (in minutes)",
+          widget: 'string'
         },
         {
           name: "video",
           label: "Video - youtube link",
-          widget: "youtube",
+          widget: "youtube" as "string",
           required: false,
-        } as CmsFieldMeta,
+        },
         {
           name: "image",
           label: "Featured Image",
@@ -682,6 +717,7 @@ export const config: CmsConfig = {
         {
           name: "name",
           label: "Name",
+          widget: 'string'
         },
       ],
     },
@@ -704,6 +740,7 @@ export const config: CmsConfig = {
         {
           name: "name",
           label: "Name",
+          widget: 'string'
         },
       ],
     },
@@ -739,14 +776,17 @@ export const config: CmsConfig = {
         {
           name: "name",
           label: "Event Name",
+          widget: 'string'
         },
         {
           name: "description",
           label: "Description",
+          widget: 'string'
         },
         {
           name: "url",
           label: "Website URL",
+          widget: 'string'
         },
         {
           name: "start_date",
@@ -826,18 +866,22 @@ export const config: CmsConfig = {
             {
               name: "name",
               label: "Name",
+              widget: 'string'
             },
             {
               name: "email",
               label: "Email",
+              widget: 'string'
             },
             {
               name: "twitter",
               label: "Twitter",
+              widget: 'string'
             },
             {
               name: "discord",
               label: "Discord",
+              widget: 'string'
             },
             {
               name: "logo",
@@ -854,14 +898,17 @@ export const config: CmsConfig = {
             {
               name: "title",
               label: "Title",
+              widget: 'string'
             },
             {
               name: "description",
               label: "Description",
+              widget: 'string'
             },
             {
               name: "role",
               label: "Role",
+              widget: 'string'
             },
             {
               name: "type",
@@ -933,14 +980,17 @@ export const config: CmsConfig = {
             {
               name: "scope",
               label: "Job scope",
+              widget: 'string'
             },
             {
               name: "how_to_apply",
               label: "How to apply",
+              widget: 'string'
             },
             {
               name: "apply_url",
               label: "Link to apply",
+              widget: 'string'
             },
           ],
         },
@@ -957,6 +1007,7 @@ export const config: CmsConfig = {
         {
           label: "ID",
           name: "id",
+          widget: 'string'
         },
         {
           label: "Type",
@@ -980,6 +1031,7 @@ export const config: CmsConfig = {
         {
           label: "URL",
           name: "url",
+          widget: 'string'
         },
         {
           label: "Image",
@@ -991,11 +1043,13 @@ export const config: CmsConfig = {
           label: "Title",
           name: "title",
           required: false,
+          widget: 'string'
         },
         {
           label: "Author",
           name: "author",
           required: false,
+          widget: 'string'
         },
         {
           label: "Published at",
@@ -1057,6 +1111,7 @@ export const config: CmsConfig = {
           label: "Tags",
           name: "tags",
           required: false,
+          widget: 'string'
         },
       ],
     },
@@ -1077,12 +1132,20 @@ export const config: CmsConfig = {
                 {
                   label: "Title",
                   name: "title",
+                  widget: 'string'
                 },
                 {
                   label: "Columns",
                   name: "columns",
                   widget: "list",
+                  summary: "Column",
                   fields: [
+                    {
+                      // quickfix for a bug with lists that have only one field
+                      name: 'not-a-field',
+                      widget: 'hidden',
+                      required: false
+                    },
                     {
                       label: "Blocks",
                       name: "blocks",
@@ -1092,6 +1155,7 @@ export const config: CmsConfig = {
                           label: "Title",
                           name: "title",
                           required: false,
+                          widget: 'string'
                         },
                         {
                           label: "Menu Items",
@@ -1127,6 +1191,7 @@ export const config: CmsConfig = {
                 {
                   label: "Name",
                   name: "name",
+                  widget: 'string'
                 },
                 {
                   label: "Image",
@@ -1136,10 +1201,12 @@ export const config: CmsConfig = {
                 {
                   label: "Twitter handle",
                   name: "twitter",
+                  widget: 'string'
                 },
                 {
                   label: "Website url",
                   name: "website_url",
+                  widget: 'string'
                 },
                 {
                   label: "Description",
@@ -1163,6 +1230,7 @@ export const config: CmsConfig = {
                 {
                   label: "Name",
                   name: "name",
+                  widget: 'string'
                 },
                 {
                   label: "Type",
@@ -1192,14 +1260,17 @@ export const config: CmsConfig = {
                 {
                   label: "Twitter handle",
                   name: "twitter",
+                  widget: 'string'
                 },
                 {
                   label: "Website url",
                   name: "website_url",
+                  widget: 'string'
                 },
                 {
                   label: "Description",
                   name: "body",
+                  widget: 'string'
                 },
               ],
             },
@@ -1218,10 +1289,12 @@ export const config: CmsConfig = {
                 {
                   label: "Name",
                   name: "name",
+                  widget: 'string'
                 },
                 {
                   label: "Website url",
                   name: "website_url",
+                  widget: 'string'
                 },
                 {
                   label: "Image",
@@ -1231,10 +1304,12 @@ export const config: CmsConfig = {
                 {
                   label: "Company name",
                   name: "company_name",
+                  widget: 'string'
                 },
                 {
                   label: "Twitter handle",
                   name: "twitter",
+                  widget: 'string'
                 },
                 {
                   label: "Description",
@@ -1258,10 +1333,12 @@ export const config: CmsConfig = {
                 {
                   label: "Name",
                   name: "name",
+                  widget: 'string'
                 },
                 {
                   label: "Website url",
                   name: "website_url",
+                  widget: 'string'
                 },
                 {
                   label: "Image",
@@ -1271,10 +1348,12 @@ export const config: CmsConfig = {
                 {
                   label: "Company name",
                   name: "company_name",
+                  widget: 'string'
                 },
                 {
                   label: "Twitter handle",
                   name: "twitter",
+                  widget: 'string'
                 },
                 {
                   label: "Description",
@@ -1298,10 +1377,12 @@ export const config: CmsConfig = {
                 {
                   label: "Name",
                   name: "name",
+                  widget: 'string'
                 },
                 {
                   label: "Website url",
                   name: "website_url",
+                  widget: 'string'
                 },
                 {
                   label: "Image",
@@ -1311,10 +1392,12 @@ export const config: CmsConfig = {
                 {
                   label: "Company name",
                   name: "company_name",
+                  widget: 'string'
                 },
                 {
                   label: "Twitter handle",
                   name: "twitter",
+                  widget: 'string'
                 },
                 {
                   label: "Description",

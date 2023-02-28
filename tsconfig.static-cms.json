@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "strict": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "target": "ESNext",
+    "jsx": "preserve",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["vite-env.d.ts", "workspaces/static-cms/src"]
+}
